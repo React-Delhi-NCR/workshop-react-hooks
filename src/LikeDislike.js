@@ -6,14 +6,22 @@ const EMOTINOS = {
     "1": "👍"
 };
 
-function LikeDislike() {
+function LikeDislike(props) {
     const [emotion, setEmotion] = React.useState(0);
+    const [count, setCount] = React.useState(0);
 
-    const changeEmotion = emotion => setEmotion(emotion);
+    React.useEffect(() => {
+        document.title = EMOTINOS[emotion];
+    }, [emotion]);
+
+    const changeEmotion = emotion => {
+        setEmotion(emotion);
+        setCount(count + 1);
+    };
 
     return (
         <div>
-            <h3>What you'r reaction to above blog {EMOTINOS[emotion]}</h3>
+            <h3>What you'r reaction to above blog {EMOTINOS[emotion]} - {count}</h3>
             <div>
                 <button onClick={() => changeEmotion(1)}>Like</button>{" "}
                 <button onClick={() => changeEmotion(-1)}>DisLike</button>
